@@ -55,32 +55,33 @@
   };
 </script>
 
-  <meta name="description" content="涉猎的编程语言有 JavaScript, Python, 领域涉及学习笔记等">
-<meta name="keywords" content="JavaScript, Node.js, Python">
-<meta property="og:type" content="website">
-<meta property="og:title" content="前端学习">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports  12345678910// a.jsconst a = require(&apos;./b.js&apos;)console.log(a) // Function// b.jsexports.name = &apos;cc&apos;exports.hobb">
+<meta name="keywords" content="Node.js,CommonJS规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CommonJS中 exports 和 module.exports 的学习点">
+<meta property="og:url" content="http://yoursite.com/2019/10/01/CommonJS中-exports-和-module-exports-的学习点/index.html">
 <meta property="og:site_name" content="前端学习">
-<meta property="og:description" content="涉猎的编程语言有 JavaScript, Python, 领域涉及学习笔记等">
+<meta property="og:description" content="exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports  12345678910// a.jsconst a = require(&apos;./b.js&apos;)console.log(a) // Function// b.jsexports.name = &apos;cc&apos;exports.hobb">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-01T12:09:56.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端学习">
-<meta name="twitter:description" content="涉猎的编程语言有 JavaScript, Python, 领域涉及学习笔记等">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="CommonJS中 exports 和 module.exports 的学习点">
+<meta name="twitter:description" content="exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports  12345678910// a.jsconst a = require(&apos;./b.js&apos;)console.log(a) // Function// b.jsexports.name = &apos;cc&apos;exports.hobb">
+  <link rel="canonical" href="http://yoursite.com/2019/10/01/CommonJS中-exports-和-module-exports-的学习点/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>前端学习</title>
+  <title>CommonJS中 exports 和 module.exports 的学习点 | 前端学习</title>
   
 
 
@@ -242,12 +243,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/CommonJS中-exports-和-module-exports-的学习点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -260,9 +262,8 @@
       <meta itemprop="name" content="前端学习">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/01/CommonJS中-exports-和-module-exports-的学习点/" class="post-title-link" itemprop="url">CommonJS中 exports 和 module.exports 的学习点</a>
+        <h1 class="post-title" itemprop="name headline">CommonJS中 exports 和 module.exports 的学习点
+
           
         </h1>
 
@@ -296,7 +297,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="exports-和-module-exports-优先级"><a href="#exports-和-module-exports-优先级" class="headerlink" title="exports 和 module.exports 优先级"></a>exports 和 module.exports 优先级</h2><ul>
+        <h2 id="exports-和-module-exports-优先级"><a href="#exports-和-module-exports-优先级" class="headerlink" title="exports 和 module.exports 优先级"></a>exports 和 module.exports 优先级</h2><ul>
 <li>若某个模块同时存在 <code>exports</code> 和 <code>module.exports</code>，则<code>require</code>只取 <code>module.exports</code></li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./b.js'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// Function</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line">exports.name = <span class="string">'cc'</span></span><br><span class="line">exports.hobby = <span class="string">'basketball'</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -328,119 +329,61 @@
 <li><a href="https://cnodejs.org/topic/5231a630101e574521e45ef8" target="_blank" rel="noopener">exports 与 module.exports 的区别</a></li>
 </ul>
 
-        
-      
     </div>
 
     
     
     
+        
+      
+
       <footer class="post-footer">
-          <div class="post-eof"></div>
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+            
+              <a href="/tags/CommonJS规范/" rel="tag"># CommonJS规范</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/01/搭建博客/" rel="next" title="搭建博客">
+                  <i class="fa fa-chevron-left"></i> 搭建博客
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
         
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/01/搭建博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="酷鱼">
-      <meta itemprop="description" content="涉猎的编程语言有 JavaScript, Python, 领域涉及学习笔记等">
-      <meta itemprop="image" content="/images/2000x.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="前端学习">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/01/搭建博客/" class="post-title-link" itemprop="url">搭建博客</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-01 13:54:37 / 修改时间：14:27:09" itemprop="dateCreated datePublished" datetime="2019-10-01T13:54:37+08:00">2019-10-01</time>
-            </span>
-          
-            
-
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Hexo-搭建个人博客"><a href="#Hexo-搭建个人博客" class="headerlink" title="Hexo 搭建个人博客"></a>Hexo 搭建个人博客</h1><p><a href="https://cuiqingcai.com/7625.html" target="_blank" rel="noopener">参考网址</a></p>
-<h1 id="NEXT-主题相关配置"><a href="#NEXT-主题相关配置" class="headerlink" title="NEXT 主题相关配置"></a>NEXT 主题相关配置</h1><p><a href="https://theme-next.org/" target="_blank" rel="noopener">参考网址</a></p>
-<h1 id="Hexo-相关配置"><a href="#Hexo-相关配置" class="headerlink" title="Hexo 相关配置"></a>Hexo 相关配置</h1><p><a href="https://hexo.io/zh-cn/docs/server" target="_blank" rel="noopener">参考网址</a></p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
   </div>
-  
-  
-  
-  </article>
-
-    
-  </div>
-
-  
 
 
           </div>
           
+    
+    <div class="comments" id="gitalk-container"></div>
+  
 
         </div>
           
@@ -455,6 +398,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -467,6 +415,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-和-module-exports-优先级"><span class="nav-number">1.</span> <span class="nav-text">exports 和 module.exports 优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exports-和-module-exports-的相同点"><span class="nav-number">2.</span> <span class="nav-text">exports 和 module.exports 的相同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块改变-module-exports-的值的影响"><span class="nav-number">3.</span> <span class="nav-text">模块改变 module.exports 的值的影响</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">3.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -652,6 +602,24 @@ window.addEventListener('pjax:success', () => {
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '[object Object]',
+      clientSecret: '[object Object]',
+      repo: 'coolpi21.github.io',
+      owner: 'coolpi21',
+      admin: ['germey'],
+      id: '10ae0273984b041187ee8aa500b5dd34',
+        language: 'zh-CN',
+      
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
 
     </div>
 </body>
