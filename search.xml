@@ -4,6 +4,10 @@
     <title><![CDATA[CommonJS中 exports 和 module.exports 的学习点]]></title>
     <url>%2F2019%2F10%2F01%2FCommonJS%E4%B8%AD-exports-%E5%92%8C-module-exports-%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%82%B9%2F</url>
     <content type="text"><![CDATA[exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports 12345678910// a.jsconst a = require('./b.js')console.log(a) // Function// b.jsexports.name = 'cc'exports.hobby = 'basketball'module.exports = function (a, b) &#123; return a + b&#125; exports 和 module.exports 的相同点 exports 和 module.exports 引用的是同一个对象的内存地址 1let exports = module.exports = &#123;&#125; 模块改变 module.exports 的值的影响 对于JavaScript 基本类型，模块内重新赋值并不会有影响，等于开辟了新的内存空间存储变量 1234567891011// b.jsmodule.exports = '123'setTimeout(() =&gt; &#123; console.log(module.exports) // 123&#125;,2000)// a.jslet a = require('./b')a = '345'console.log(a) // 345 对于 JavaScript 引用类型，模块内对引用对象属性赋值，会同时改变引用对象内的属性值 12345678910111213// b.jsmodule.exports = &#123; name: 'cxk'&#125;setTimeout(() =&gt; &#123; console.log(module.exports) // &#123;name: 'kris'&#125;&#125;,2000)// a.jslet a = require('./b')a.name = 'kris'console.log(a) // &#123;name: 'kris'&#125; 对于 JavaScript 引用类型，模块内对引用对象重复赋值，等于开辟新的存储空间，不会造成原有的引用对象的改变 12345678910111213// b.jsmodule.exports = &#123; name: 'cxk'&#125;setTimeout(() =&gt; &#123; console.log(module.exports) // &#123;name: 'kris'&#125;&#125;,2000)// a.jslet a = require('./b')a = 'kris'console.log(a) // 'kris' 参考资料 知乎问答 exports 与 module.exports 的区别]]></content>
+      <categories>
+        <category>学习</category>
+        <category>思考</category>
+      </categories>
       <tags>
         <tag>Node.js</tag>
         <tag>CommonJS规范</tag>

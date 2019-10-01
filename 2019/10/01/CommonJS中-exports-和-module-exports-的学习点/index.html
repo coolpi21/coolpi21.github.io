@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="前端学习">
 <meta property="og:description" content="exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports  12345678910// a.jsconst a = require(&apos;./b.js&apos;)console.log(a) // Function// b.jsexports.name = &apos;cc&apos;exports.hobb">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-01T12:15:08.335Z">
+<meta property="og:updated_time" content="2019-10-01T12:17:52.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CommonJS中 exports 和 module.exports 的学习点">
 <meta name="twitter:description" content="exports 和 module.exports 优先级 若某个模块同时存在 exports 和 module.exports，则require只取 module.exports  12345678910// a.jsconst a = require(&apos;./b.js&apos;)console.log(a) // Function// b.jsexports.name = &apos;cc&apos;exports.hobb">
@@ -278,12 +278,32 @@
                 
               
 
-              <time title="创建时间：2019-10-01 20:05:15 / 修改时间：20:15:08" itemprop="dateCreated datePublished" datetime="2019-10-01T20:05:15+08:00">2019-10-01</time>
+              <time title="创建时间：2019-10-01 20:05:15 / 修改时间：20:17:52" itemprop="dateCreated datePublished" datetime="2019-10-01T20:05:15+08:00">2019-10-01</time>
             </span>
           
             
 
             
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/思考/" itemprop="url" rel="index"><span itemprop="name">思考</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -305,24 +325,22 @@
 <a id="more"></a>
 
 <h2 id="exports-和-module-exports-的相同点"><a href="#exports-和-module-exports-的相同点" class="headerlink" title="exports 和 module.exports 的相同点"></a>exports 和 module.exports 的相同点</h2><ul>
-<li><p><code>exports</code> 和 <code>module.exports</code> 引用的是同一个对象的内存地址</p>
-</li>
-<li><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> exports = <span class="built_in">module</span>.exports = &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+<li><code>exports</code> 和 <code>module.exports</code> 引用的是同一个对象的内存地址  </li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> exports = <span class="built_in">module</span>.exports = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="模块改变-module-exports-的值的影响"><a href="#模块改变-module-exports-的值的影响" class="headerlink" title="模块改变 module.exports 的值的影响"></a>模块改变 module.exports 的值的影响</h2><ul>
-<li>对于JavaScript 基本类型，模块内重新赋值并不会有影响，等于开辟了新的内存空间存储变量</li>
+<li>对于JavaScript 基本类型，模块内重新赋值并不会有影响，等于开辟了新的内存空间存储变量  </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">'123'</span></span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">module</span>.exports) <span class="comment">// 123</span></span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./b'</span>)</span><br><span class="line">a = <span class="string">'345'</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 345</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>对于 JavaScript 引用类型，模块内对引用对象属性赋值，会同时改变引用对象内的属性值</li>
+<li>对于 JavaScript 引用类型，模块内对引用对象属性赋值，会同时改变引用对象内的属性值  </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    name: <span class="string">'cxk'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">module</span>.exports) <span class="comment">// &#123;name: 'kris'&#125;</span></span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./b'</span>)</span><br><span class="line">a.name = <span class="string">'kris'</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// &#123;name: 'kris'&#125;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>对于 JavaScript 引用类型，模块内对引用对象重复赋值，等于开辟新的存储空间，不会造成原有的引用对象的改变</li>
+<li>对于 JavaScript 引用类型，模块内对引用对象重复赋值，等于开辟新的存储空间，不会造成原有的引用对象的改变  </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    name: <span class="string">'cxk'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">module</span>.exports) <span class="comment">// &#123;name: 'kris'&#125;</span></span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">require</span>(<span class="string">'./b'</span>)</span><br><span class="line">a = <span class="string">'kris'</span></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// 'kris'</span></span><br></pre></td></tr></table></figure>
 
@@ -449,7 +467,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
